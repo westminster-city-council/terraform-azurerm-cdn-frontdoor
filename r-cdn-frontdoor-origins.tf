@@ -38,10 +38,10 @@ resource "azurerm_cdn_frontdoor_origin" "main" {
 
   enabled                        = each.value.enabled
   certificate_name_check_enabled = each.value.certificate_name_check_enabled
-  host_name                      = each.value.host_name
+  host_name                      = var.static_sites_resource_uris[each.value.static_site_key]
   http_port                      = each.value.http_port
   https_port                     = each.value.https_port
-  origin_host_header             = each.value.origin_host_header
+  origin_host_header             = var.static_sites_resource_uris[each.value.static_site_key]
   priority                       = each.value.priority
   weight                         = each.value.weight
 

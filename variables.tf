@@ -80,6 +80,14 @@ variable "origin_groups" {
   default = []
 }
 
+# variable to hold map of static site names to their resource IDs, provided by terraform-azurerm-avm-res-web-staticsite module outpu
+variable "static_sites_resource_uris" {
+  description = "Map of origin names to their resource IDs."
+  type        = map(string)
+  default     = {}
+
+}
+
 # ------------------
 # CDN FrontDoor Origins
 variable "origins" {
@@ -90,13 +98,11 @@ variable "origins" {
     origin_group_name              = string
     enabled                        = optional(bool, true)
     certificate_name_check_enabled = optional(bool, true)
-
-    host_name          = string
-    http_port          = optional(number, 80)
-    https_port         = optional(number, 443)
-    origin_host_header = optional(string)
-    priority           = optional(number, 1)
-    weight             = optional(number, 1)
+    static_site_key                = string # Key to look up the resource ID in the static_sites_resource_uris map
+    http_port                      = optional(number, 80)
+    https_port                     = optional(number, 443)
+    priority                       = optional(number, 1)
+    weight                         = optional(number, 1)
 
     private_link = optional(object({
       request_message        = optional(string)
