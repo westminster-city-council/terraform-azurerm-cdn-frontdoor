@@ -5,7 +5,7 @@ terraform {
       version = "~> 4.31"
     }
     azurecaf = {
-      source  = "claranet/azurecaf"
+      source  = "aztfmod/azurecaf"
       version = ">= 1.2.28"
     }
   }
